@@ -113,6 +113,8 @@ Par ailleurs, une composition docker est disponible dans le dépot git de
 [mviewerstudio](https://github.com/geobretagne/mviewerstudio), incluant mviewer
 et mviewerstudio.
 
+theme: Architect
+
 ## Fichier apps/default.xml
 
 Le fichier de configuration permet la personnalisation des thèmes/couches du visualiseur ; une configuration par
