@@ -39,7 +39,7 @@
 				attribution="Sources: Ministère de l'éducation nationale - 20206 | Traitements: CRIGE PACA - 2026" 
 				metadata="https://data.education.gouv.fr/explore/assets/fr-en-adresse-et-geolocalisation-etablissements-premier-et-second-degre/"
 				metadata-csw="">
-				<template url="https://geogismo.crige-paca.org/formation/luc/templates/etablissement_scolaire.mst"></template>
+				<template url="https://github.com/LucCRIGE/test_mviewer/blob/main/templates/etablissement_scolaire.mst"></template>
 			</layer>
 			<layer id="zai_gard_lozere" name="Zones de loisir"  visible="true" tiled="false"
 				searchable="true" queryable="true"
