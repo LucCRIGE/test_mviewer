@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <application title="Pollution atmosphérique autour des établissements scolaires et équipement de Loisirs du Gard et de la Lozère" mouseposition="false" logo="img/logo/logo_officiel_2021_nb.png" help="mviewer_help.html" measuretools="true" mapprint="true" exportpng="true" togglealllayersfromtheme="true" style="css/themes/green_sea.css" drawtools="true"/>
+    <application title="Impacts de la pollution atmosphérique sur les établissement scolaires et zones de loisirs dans le Gard et la Lozère" mouseposition="false" logo="img/logo/logo-crige-texte.png" help="mviewer_help.html" measuretools="true" mapprint="true" exportpng="true" togglealllayersfromtheme="true" style="css/themes/green_sea.css"/>
     <tools><draw help="true" geometryStroke="#2e5367" singleDraw="true" nbPixelsToClosePolygon="10"/></tools>
 	<mapoptions maxzoom="19" projection="EPSG:3857" center="429487.780,5503109.252" zoom="9" projextent="331865.409, 331865.409, 5617705.330, 5617705.330" />
   
@@ -27,13 +27,13 @@
 
     <themes> 
         <theme name="Ecoles et zones de loisirs"  collapsed="false" id="ecole" icon="fas fa-graduation-cap">
-			<layer id="etablissement_scolaire_30-48" name="Etablissements scolaires"  visible="true" tiled="false"
+			<layer id="etablissement_scolaire_luc" name="Etablissements scolaires"  visible="true" tiled="false"
 				searchable="true" queryable="true"
 				attributefilter="true" attributefield="secteur_public_prive_libe" attributevalues="Public,Privé"  attributelabel="Statut" attributestylesync="false" attributefilterenabled="false"
 				infopanel="right-panel"
 				infoformat="application/vnd.ogc.gml" featurecount="5"
 				timefilter="false" 
-				style="etablissement_scolaire"
+				style="etablissement_scolaires"
 				stylesalias=""
 				url="https://geoservices2.crige-paca.org/geoserver/formation/wms"
 				attribution="Sources: Ministère de l'éducation nationale - 20206 | Traitements: CRIGE PACA - 2026" 
@@ -41,27 +41,48 @@
 				metadata-csw="">
 				<template url="templates/etablissement_scolaire.mst"></template>
 			</layer>
-			<layer id="zai_gard_lozere" name="Zones de loisir"  visible="true" tiled="false"
+			<layer id="zai_luc" name="Zones de loisir"  visible="true" tiled="false"
 				searchable="true" queryable="true"
 				attributefilter="false" 
 				infopanel="right-panel"
 				infoformat="application/vnd.ogc.gml" featurecount="5"
 				timefilter="false" 
 				style="zai_categorie, zai_nature, zai_nature_detaillee"
-                styletitle="Type de zone"
+				styletitle="Type de zone"
 				stylesalias="Catégorie, Nature, Nature détaillée"
 				url="https://geoservices2.crige-paca.org/geoserver/formation/wms"
 				attribution="Sources: IGN - BDTopo 2025 | Traitements: CRIGE PACA 2026" 
-				metadata=""
+				metadata="https://cartes.gouv.fr/explorer-les-cartes/"
 				metadata-csw="">
-			</layer>
+				</layer>
 			<layer id="LANDCOVER.FORESTINVENTORY.V2" name="Forêts" visible="false" tiled="true"
 				queryable="true" 
                 infoformat="text/html" featurecount="5"                
 				url="https://data.geopf.fr/wms-r/wms" 
 				attribution="IGN" 
 				metadata=""
-				metadata-csw="" />	
+				metadata-csw="" >
+			</layer>
+			<layer id="pression_pesticides" name="Pression pesticides autour des établissements scolaires " 
+			type="customlayer" 
+			vectorlegend="true" 
+			url="customlayers/pression_pesticides.js" 
+			metadata="https://www.data.gouv.fr/datasets/pression-pesticides-autour-des-etablissements-scolaires-francais" 
+			metadata-csw="" 
+			queryable="true" 
+			fields="" 
+			aliases="" 
+			visible="true" 
+			searchable="true" 
+			searchengine="fuse" 
+			fusesearchkeys="" 
+			fusesearchresult="" 
+			tooltip="true" 
+			tooltipcontent="" 
+			tooltipenabled="true" 
+			attribution="Le Monde / Atmo Occitanie"> 
+			<template url="templates/pression_pesticides.mst"></template>
+			</layer>
 		</theme>         
         <theme name="Pollution"  collapsed="true" id="pollution" icon="fas fa-industry">
 		<group name="2024" id="grp2024" >

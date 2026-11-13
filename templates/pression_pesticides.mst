@@ -1,0 +1,131 @@
+{{#features}}
+    <li id="{{feature_ol_uid}}" class="item" style="padding-bottom:15px;">
+        <div class="title-feature" style="padding-top:10px;">{{toponyme}}</div>
+        <div class="title-feature" style="padding-top:10px;">{{nature_detaillee}}</div>
+        <div class="panel panel-default">
+            <div class="panel-body panel-graph">
+                <img src="https://cdn-icons-png.flaticon.com/512/3980/3980036.png" style="width:30%;">
+                <p style="margin:-5px 0px -5px 0px!important;">
+                    <span id="{{part_bio_2022}}" class="number"></span><span class="number" style="font-size:30px;">{{part_bio_2022}}%</span>
+                </p>
+                <p class="title-number">Part d'agriculture biologique<br><span class="sub-number"><i>sur la commune en 2022</i></span></p>
+            </div>
+        </div>
+
+        <!-- Barre de progression : cpe_min (0 à 0,449) -->
+        <div class="panel panel-default">
+            <div class="panel-body panel-graph">
+                <div class="indicateur">
+                    <div class="indicateur-label">Exposition aux pesticides les plus dangereux
+                        <span class="indicateur-value">{{cpe_min}}</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-cpe" data-value="{{cpe_min}}" data-min="0" data-max="0.449"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre de progression : ift_moy (0 à 4,58) -->
+        <div class="panel panel-default">
+            <div class="panel-body panel-graph">
+                <div class="indicateur">
+                    <div class="indicateur-label">Indice de fréquence de traitements phytosanitaires (IFT)
+                        <span class="indicateur-value">{{ift_moy}}</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-ift" data-value="{{ift_moy}}" data-min="0" data-max="4.58"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre de progression : o3_22_umg-31 (50 à 65) -->
+        <div class="panel panel-default">
+            <div class="panel-body panel-graph">
+                <div class="indicateur">
+                    <div class="indicateur-label">Nombre de jours supérieur à 120 µg/m³ sur 8h pour l'Ozone O3
+                        <span class="indicateur-value">{{o3_2022_ugm-31}} jours</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-o3" data-value="{{o3_2022_ugm-31}}" data-min="50" data-max="65"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+{{/features}}
+
+<style>
+    .title-feature, .indicateur {
+        color: #2d4059;
+        font-size:23px;
+        margin-bottom:3%;
+        line-height:1;
+    }
+    .indicateur {
+        text-align: center;
+    }
+    .indicateur-label {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .indicateur-value {
+        font-size: 15px;
+        font-weight: normal;
+        color: #3db39e;
+        margin-left: 5px;
+    }
+    .panel-graph {
+        color: #3db39e;
+        text-align: center;
+    }
+    .number {
+        font-size: 40px;
+    }
+    .progress-track {
+        width: 100%;
+        height: 18px;
+        background-color: #e8e8e8;
+        border-radius: 9px;
+        overflow: hidden;
+    }
+    .progress-fill {
+        display: block;
+        height: 100%;
+        width: 0%;
+        border-radius: 9px;
+        transition: width 0.6s ease;
+    }
+    .fill-cpe { background: linear-gradient(90deg, #3db39e, #2d4059); }
+    .fill-ift { background: linear-gradient(90deg, #ec605f, #d35400); }
+    .fill-o3  { background: linear-gradient(90deg, #ffc939, #f39c12); }
+</style>
+
+<script>
+    /**
+     * Calcule et applique la largeur de chaque barre de progression.
+     * Largeur (%) = (valeur - min) / (max - min) * 100, bornée entre 0 et 100.
+     */
+    var drawProgressBars = function () {
+        document.querySelectorAll(".progress-fill").forEach(function (el) {
+            var value = parseFloat(el.getAttribute("data-value").replace(",", "."));
+            var min = parseFloat(el.getAttribute("data-min"));
+            var max = parseFloat(el.getAttribute("data-max"));
+            if (isNaN(value)) { value = min; }
+            var pct = ((value - min) / (max - min)) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            el.style.width = pct + "%";
+        });
+    };
+
+    // Exécution quand la popup est rendue (les templates mviewer sont injectés dynamiquement).
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        drawProgressBars();
+    } else {
+        document.addEventListener("DOMContentLoaded", drawProgressBars);
+    }
+    // Filet de sécurité si la popup est re-rendue après coup.
+    setTimeout(drawProgressBars, 300);
+</script>
